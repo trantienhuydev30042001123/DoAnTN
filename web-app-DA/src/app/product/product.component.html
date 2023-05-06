@@ -1,0 +1,20 @@
+<div class="container1 mt-5">
+  <mat-grid-list class="view-project"  cols="5"  rowHeight="2:3" gutterSize="20">
+    <mat-grid-tile *ngFor="let p of product">
+      <div class="row home-page-product-image"  >
+        <div class="product-image">
+          <img  src="{{p.image}}">
+        </div>
+        <div class="name-product mt-3">
+          <p><b>{{p.name}}</b></p>
+        </div>
+        <div class="product-price  mt-2">
+          <p class="product-price-start">{{p.price}}đ</p><p><b>{{p.lastprice}}đ</b></p>
+        </div>
+        <div mat class="mt-2 button">
+          <button mat-raised-button color="warn" style="margin-bottom: 20px" (click)="showProductDetails(p.id)" >Chi tiết</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
