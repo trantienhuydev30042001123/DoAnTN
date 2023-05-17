@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements ICartService {
@@ -27,11 +28,22 @@ public class CartServiceImpl implements ICartService {
     public void addToCart(Long id) {
         Product product = iProductRepository.findById(id).get();
             Cart cart = new Cart(product);
+            cart.setQuantity(1);
             cartRepository.save(cart);
     }
 
     @Override
     public List<Cart> finAll() {
         return cartRepository.findAll();
+    }
+
+    @Override
+    public Optional<Cart> findById(Long id) {
+        return cartRepository.findById(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        cartRepository.deleteById(id);
     }
 }

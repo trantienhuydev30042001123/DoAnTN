@@ -23,21 +23,19 @@ public class Product implements Serializable {
     private String image2;
     @Lob
     private String image3;
-    private Double price;
+    private Integer price;
     private Integer discount;
     @Size(max = 10000)
     private String description;
     private Boolean available;
     @ManyToOne @JoinColumn(name = "Categoryid")
     private Category category;
-    @JsonIgnore
-    @OneToMany(mappedBy = "productR")
-    List<Rating> ratings;
-    @JsonIgnore
+    @ManyToOne@JoinColumn(name = "Ratingid")
+    private Rating rating;
     @OneToMany(mappedBy = "product")
     List<OrderDetail> orderDetails;
 
-    public Product(Long id, String name, String image, String image2, String image3, Double price, Integer discount, Date createDate, String description, Boolean available, Category category, List<Rating> ratings, List<OrderDetail> orderDetails) {
+    public Product(Long id, String name, String image, String image2, String image3, Integer price, Integer discount, String description, Boolean available, Category category, Rating rating, List<OrderDetail> orderDetails) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -48,7 +46,7 @@ public class Product implements Serializable {
         this.description = description;
         this.available = available;
         this.category = category;
-        this.ratings = ratings;
+        this.rating = rating;
         this.orderDetails = orderDetails;
     }
 
@@ -92,11 +90,11 @@ public class Product implements Serializable {
         this.image3 = image3;
     }
 
-    public Double getPrice() {
-        return this.price;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -132,12 +130,12 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    public List<Rating> getRatings() {
-        return ratings;
+    public Rating getRating() {
+        return rating;
     }
 
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 
     public List<OrderDetail> getOrderDetails() {

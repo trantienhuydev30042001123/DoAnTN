@@ -28,14 +28,14 @@ public class AdminProductController {
         return new ResponseEntity<>(new ResponseMessage("Create Product success"), HttpStatus.OK);
     }
 
-    @GetMapping()
-    public ResponseEntity<?> GetListProduct(){
-        List<Product> products = productServiceIpm.finAll();
-        if (products.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(products, HttpStatus.OK);
-    }
+//    @GetMapping()
+//    public ResponseEntity<?> GetListProduct(){
+//        List<Product> products = productServiceIpm.finAll();
+//        if (products.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(products, HttpStatus.OK);
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product product){

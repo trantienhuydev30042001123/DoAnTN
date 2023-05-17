@@ -14,8 +14,8 @@ mat-grid-tile{
 }
 .product-image{
   width: 230px;
-  height: 180px;
-  margin-bottom: 25px;
+  height: 150px;
+  /*margin-bottom: 10px;*/
 }
 .product-image img{
   height: 100%;
@@ -27,6 +27,7 @@ mat-grid-tile{
   text-align: center;
   color: #459a9a;
   width: 100%;
+  height: 65px;
   font-size: 16px;
 }
 .product-price{
@@ -44,9 +45,30 @@ mat-grid-tile{
   outline: none;
 }
 .button{
-  margin: 0 auto;
+  text-align: center;
 }
 .product-price-start{
   text-decoration: line-through;
 }
-
+.title{
+  font-size: 30px;
+  font-weight:bold;
+  text-align: center;
+  margin-top: 20px;
+}
+.product-rating{
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+.rating{
+  text-align: center;
+  color: #ffdb0d;
+}
+.page{
+  text-align: center;
+  margin-top: 30px;
+}
+.home-search{
+  text-align: center;
+  margin-top: 30px;
+}

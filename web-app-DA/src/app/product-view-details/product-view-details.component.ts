@@ -4,6 +4,8 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {ActivatedRoute, Router} from "@angular/router";
 import {productDTO} from "../dto/ProductDTO";
 import {NavBarComponent} from "../nav-food/nav-bar/nav-bar.component";
+import {CartComponent} from "../cart/cart.component";
+import {cartDTO} from "../dto/cartDTO";
 
 @Component({
   selector: 'app-product-view-details',
@@ -11,20 +13,23 @@ import {NavBarComponent} from "../nav-food/nav-bar/nav-bar.component";
   styleUrls: ['./product-view-details.component.css']
 })
 export class ProductViewDetailsComponent implements OnInit{
+  cart :cartDTO[] = [];
   defaults: productDTO;
   singleProduct : any;
   selectedProductIndex = 0;
   selectedProductIndex1 = 1;
   selectedProductIndex2 = 2;
   navBarComponent: NavBarComponent;
+
+  private cartComponent : CartComponent;
   constructor(@Inject(MAT_DIALOG_DATA) public id: string,
     private helperService: HelperService,
-
               private route: ActivatedRoute,
               private router: Router,
               public dialogRef: MatDialogRef<ProductViewDetailsComponent>,) {
   }
   ngOnInit(): void {
+    // this.cartComponent.getListCart()
     this.getProductdetail()
     this.defaults = new productDTO();
     if (this.id ) {
@@ -78,14 +83,21 @@ export class ProductViewDetailsComponent implements OnInit{
       })
   }
   addToCart(){
-    this.helperService
-      .add(
-        "cart", this.id)
-      .then((res: any) => {
-      })
-      .catch((error) => {
-        console.log("loi")
-      })
+    // let idx = this.cart.findIndex((item:any)=>{
+    //   return item.id == this.id
+    // });
+    // if (idx >= 0){
+    //   this.cart[idx].quantity += 1;
+    // }else{
+      this.helperService
+        .add(
+          "cart", this.id)
+        .then((res: any) => {
+        })
+        .catch((error) => {
+          console.log("loi")
+        })
+    // }
   }
   changeIndex( index: any ){
     this.selectedProductIndex = index;

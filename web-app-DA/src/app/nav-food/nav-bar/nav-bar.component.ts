@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnChanges, Input, OnInit, SimpleChanges} from '@angular/core';
 import {TokenService} from "../../service/token.service";
 import {Router} from "@angular/router";
 import {HelperService} from "../../service/helper-service";
+import {productDTO} from "../../dto/ProductDTO";
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,9 +10,11 @@ import {HelperService} from "../../service/helper-service";
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit{
-  totalItem : number = 0;
+  carId : number;
+ totalItem : number = 0;
   name: string;
   checkLogin = false;
+
   constructor(private tokenService: TokenService,
               private router: Router,
               private helperService: HelperService,
@@ -24,6 +27,12 @@ export class NavBarComponent implements OnInit{
       this.checkLogin = true;
       this.name = this.tokenService.getName()
     }
+  }
+  // ngDoCheck(): void {
+  //
+  // }
+  ngOnChanges(changes: SimpleChanges): void {
+
   }
   public getListCart(): void {
     this.helperService
@@ -38,11 +47,14 @@ export class NavBarComponent implements OnInit{
       })
   }
   logOut(){
-    console.log("abc")
     this.tokenService.logOut();
     this.router.navigate(['home']).then(()=> {
       window.location.reload();
     })
   }
-
+  public getCategory(number: number): void {
+        this.router.navigate(['Category'],{
+          queryParams: {data:this.carId}
+        })
+  }
 }

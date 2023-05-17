@@ -23,6 +23,7 @@ public class productConverter {
 
     public productDTO toDTO(Product product){
         productDTO productDTO = new productDTO();
+        productDTO.setId(product.getId());
         productDTO.setName(product.getName());
         productDTO.setImage(product.getImage());
         productDTO.setImage2(product.getImage2());
@@ -31,6 +32,8 @@ public class productConverter {
         productDTO.setDiscount(product.getDiscount());
         productDTO.setDescription(product.getDescription());
         productDTO.setAvailable(product.getAvailable());
+        productDTO.setCategory(product.getCategory());
+        productDTO.setRatings(product.getRating());
         return productDTO;
     }
     public productDTO toDTO1(Product product){

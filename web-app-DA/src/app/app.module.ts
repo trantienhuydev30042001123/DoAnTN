@@ -24,16 +24,28 @@ import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
 import {MatTableModule} from "@angular/material/table";
 import {MatMenuModule} from "@angular/material/menu";
 import { CartComponent } from './cart/cart.component';
+import {MatListModule} from "@angular/material/list";
+import { IntroduceComponent } from './introduce/introduce.component';
+import { ProductCategoryComponent } from './product-category/product-category.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import {RatingModule} from 'ng-starrating';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {DialogConfirmModule} from "./dialog-confirm/dialog-confirm.module";
+import {DialogConfirmComponent} from "./dialog-confirm/dialog-confirm.component";
 
 
 const appRoutes: Routes = [
   {path:'',redirectTo:'home', pathMatch:"full"},
   {path:'home', component:HomeComponent},
+  {path:'search/:searchItem ', component:HomeComponent},
+  {path:'introduce', component:IntroduceComponent},
   {path:'register', component:RegisterComponent},
   {path:'login', component:LoginComponent, pathMatch:"full"},
   {path:'product', component:ProductComponent},
   {path:'product/:id', component:ProductViewDetailsComponent},
   {path:'cart', component:CartComponent},
+  {path:'Category', component:ProductCategoryComponent},
 ];
 @NgModule({
   bootstrap: [AppComponent],
@@ -46,27 +58,35 @@ const appRoutes: Routes = [
     FooterComponent,
     ProductComponent,
     ProductViewDetailsComponent,
-    CartComponent
+    CartComponent,
+    IntroduceComponent,
+    ProductCategoryComponent,
+    DialogConfirmComponent
   ],
-  imports: [
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot(appRoutes),
-    BrowserModule,
-    MatInputModule,
-    MatDialogModule,
-    MatOptionModule,
-    MatSelectModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    RouterOutlet,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatGridListModule,
-    MatTableModule,
-    MatMenuModule
-  ],
+    imports: [
+        HttpClientModule,
+        FormsModule,
+        RouterModule.forRoot(appRoutes),
+        BrowserModule,
+        MatInputModule,
+        MatDialogModule,
+        MatOptionModule,
+        MatSelectModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        RouterOutlet,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatGridListModule,
+        MatTableModule,
+        MatMenuModule,
+        MatListModule,
+        NgbModule,
+        NgxStarRatingModule,
+        RatingModule,
+        NgxPaginationModule
+    ],
   providers: []
 })
 export class AppModule { }

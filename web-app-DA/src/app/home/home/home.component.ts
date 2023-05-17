@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {productDTO} from "../../dto/ProductDTO";
+import {HelperService} from "../../service/helper-service";
 
 interface carouse1Image {
   imageSrc: string;
@@ -37,7 +40,12 @@ export class HomeComponent implements OnInit{
   @Input() slideInterval = 4000;
  carouse1Image = [];
   selectedIndex = 0;
+  product:productDTO[] = [];
+  constructor(private helperService: HelperService,
+    private router:ActivatedRoute) {
+  }
   ngOnInit(): void {
+
     if (this.autoSlide){
       this.autoSlideImage();
     }

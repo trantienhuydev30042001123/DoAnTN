@@ -13,6 +13,7 @@ public class Cart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private int quantity;
     @OneToOne
     private Product product;
     @OneToOne
@@ -22,8 +23,9 @@ public class Cart implements Serializable {
         this.product = product;
     }
 
-    public Cart(Long id, Product product, User user) {
+    public Cart(Long id, int quantity, Product product, User user) {
         this.id = id;
+        this.quantity = quantity;
         this.product = product;
         this.user = user;
     }
@@ -54,5 +56,13 @@ public class Cart implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

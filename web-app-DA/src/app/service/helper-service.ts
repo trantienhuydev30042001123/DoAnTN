@@ -15,7 +15,15 @@ export class HelperService {
     private tokenStorage: TokenService
   ) {
   }
-  public getAll( apiURL: string) {
+  public getAllSearch( apiURL : string,searchKey : string,startprice : number,endPrice : number) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.baseURL + apiURL + "?searchKey=" + searchKey + "&startprice=" + startprice + "&endPrice=" + endPrice , this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
+  public getAll( apiURL : string,) {
     return new Promise((resolve, reject) => {
       this.httpClient.get(this.baseURL + apiURL , this.httpOptions)
         .subscribe((response: any) => {
@@ -31,7 +39,14 @@ export class HelperService {
         }, reject);
     });
   }
-
+  public findProductByCategory(apiURL: string, catId: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.baseURL + apiURL + "/" + catId, this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
   public add( apiURL: string, id: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpClient.post(this.baseURL + apiURL + "/" + id, this.httpOptions)
@@ -46,5 +61,21 @@ export class HelperService {
     const url = `${this.baseURL}${id}`;
     return this.httpClient.get<productDTO>(url).pipe(
     );
+  }
+  public getAllproduct() {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.baseURL + "product" , this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
+  }
+  public deleteById(apiURL: string, entity: any,): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.delete(this.baseURL + apiURL + "/" + entity, this.httpOptions)
+        .subscribe((response: any) => {
+          resolve(response);
+        }, reject);
+    });
   }
 }

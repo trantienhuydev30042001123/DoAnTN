@@ -1,5 +1,6 @@
 package com.huy.webdoan.Controller.user;
 
+import com.huy.webdoan.dto.Output;
 import com.huy.webdoan.dto.productDTO;
 import com.huy.webdoan.model.Product;
 import com.huy.webdoan.dto.response.ResponseMessage;
@@ -7,6 +8,8 @@ import com.huy.webdoan.service.impl.ProductServiceImpl;
 import com.huy.webdoan.utils.Contanst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +33,30 @@ public class ProductController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> GetListProduct(){
-        List<Product> products = productServiceIpm.finAll();
-        if (products.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
+//    public ResponseEntity<?> GetListProduct(){
+//        List<Product> products = productServiceIpm.finAll();
+//        if (products.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(products, HttpStatus.OK);
+//    }
+    public ResponseEntity<?> GetListProduct(
+            @RequestParam(defaultValue = "") String searchKey,
+            @RequestParam(defaultValue = "0") Integer startprice,
+            @RequestParam(defaultValue = "0") Integer endPrice) {
+        List<Product> products = productServiceIpm.finAll(searchKey, startprice, endPrice);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+//        @GetMapping()
+//    public Output GetListProduct(@RequestParam int page,
+//                                 @RequestParam int limit){
+//        Output result = new Output();
+//        result.setPage(page);
+//        Pageable pageable = PageRequest.of(page - 1 , limit);
+//        result.setListResult(productServiceIpm.finAll(pageable));
+//        result.setTotalPage((int) Math.ceil((double) (productServiceIpm.totalItem()) /limit));
+//        return result;
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product product){
@@ -81,5 +101,15 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new  ResponseEntity<> (product, HttpStatus.OK);
+    }
+    @GetMapping("/category/{catId}")
+    public ResponseEntity<?> getProductbyCategory(@PathVariable Long catId){
+      List<Product> findProductByCategory =  this.productServiceIpm.findProductByCategory(catId);
+        return new ResponseEntity<>(findProductByCategory,HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/Rating/{RatingId}")
+    public ResponseEntity<?> getProductbyRating(@PathVariable Long RatingId){
+        List<Product> findProductByRating =  this.productServiceIpm.findProductByRating(RatingId);
+        return new ResponseEntity<>(findProductByRating,HttpStatus.ACCEPTED);
     }
 }

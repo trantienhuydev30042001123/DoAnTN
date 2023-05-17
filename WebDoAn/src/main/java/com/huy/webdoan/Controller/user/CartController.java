@@ -3,8 +3,10 @@ package com.huy.webdoan.Controller.user;
 import com.huy.webdoan.dto.response.ResponseMessage;
 import com.huy.webdoan.model.Cart;
 import com.huy.webdoan.model.LogIn.User;
+import com.huy.webdoan.model.Product;
 import com.huy.webdoan.model.Size;
 import com.huy.webdoan.service.ICartService;
+import com.huy.webdoan.service.impl.CartServiceImpl;
 import com.huy.webdoan.utils.Contanst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +23,28 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CartController {
     @Autowired
-    private ICartService iCartService;
+    private CartServiceImpl cartService;
     @PostMapping("/{id}")
     public ResponseEntity<?> addToCart(@PathVariable Long id){
-        iCartService.addToCart(id);
+        cartService.addToCart(id);
         return new ResponseEntity<>(new ResponseMessage("add Success"), HttpStatus.OK);
     }
     @GetMapping()
     public ResponseEntity<?> GetListCart(){
-        List<Cart> carts = iCartService.finAll();
+        List<Cart> carts = cartService.finAll();
         if (carts.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(carts, HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteOder(@PathVariable Long id){
+        Optional<Cart> cart = cartService.findById(id);
+
+        if(!cart.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        cartService.delete(cart.get().getId());
+        return new ResponseEntity<>(new ResponseMessage("Delete Success"), HttpStatus.OK);
     }
 }

@@ -7,7 +7,37 @@ import com.huy.webdoan.model.Rating;
 import java.io.Serializable;
 import java.util.List;
 public class productDTO implements Serializable {
-//    private static final long serialVersionUID = 1L;
+
+    private Long id;
+    private String name;
+    private String image;
+    private String image2;
+    private String image3;
+    private Integer price;
+    private Integer discount;
+    private String description;
+    private Boolean available;
+    private Category category;
+    private Rating ratings;
+//    private List<OrderDetail> orderDetails;
+
+
+    public productDTO() {
+    }
+
+    public productDTO(Long id, String name, String image, String image2, String image3, Integer price, Integer discount, String description, Boolean available, Category category, Rating ratings) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.image2 = image2;
+        this.image3 = image3;
+        this.price = price;
+        this.discount = discount;
+        this.description = description;
+        this.available = available;
+        this.category = category;
+        this.ratings = ratings;
+    }
 
     public Long getId() {
         return id;
@@ -16,24 +46,6 @@ public class productDTO implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public void setCategory(Long category) {
-        this.category = category;
-    }
-
-    private Long id;
-    private String name;
-    private String image;
-    private String image2;
-    private String image3;
-    private Double price;
-    private Integer discount;
-    private String description;
-    private Boolean available;
-    private Long category;
-//    private List<Rating> ratings;
-//    private List<OrderDetail> orderDetails;
-
 
     public String getName() {
         return name;
@@ -67,11 +79,12 @@ public class productDTO implements Serializable {
         this.image3 = image3;
     }
 
-    public Double getPrice() {
+
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -99,43 +112,19 @@ public class productDTO implements Serializable {
         this.available = available;
     }
 
-    public Long getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Category Long) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-//    public List<Rating> getRatings() {
-//        return ratings;
-//    }
-//
-//    public void setRatings(List<Rating> ratings) {
-//        this.ratings = ratings;
-//    }
-//
-//    public List<OrderDetail> getOrderDetails() {
-//        return orderDetails;
-//    }
-//
-//    public void setOrderDetails(List<OrderDetail> orderDetails) {
-//        this.orderDetails = orderDetails;
-//    }
-
-    public productDTO() {
+    public Rating getRatings() {
+        return ratings;
     }
 
-    public productDTO(Long id, String name, String image, String image2, String image3, Double price, Integer discount, String description, Boolean available, Long category) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.image2 = image2;
-        this.image3 = image3;
-        this.price = price;
-        this.discount = discount;
-        this.description = description;
-        this.available = available;
-        this.category = category;
+    public void setRatings(Rating ratings) {
+        this.ratings = ratings;
     }
 }

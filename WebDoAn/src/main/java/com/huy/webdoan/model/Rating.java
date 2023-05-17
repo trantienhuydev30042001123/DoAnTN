@@ -6,8 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-@Getter
-@Setter
 @Entity
 @Table(name = "Rating")
 public class Rating implements Serializable {
@@ -15,8 +13,28 @@ public class Rating implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Integer stars;
-    @ManyToOne @JoinColumn(name = "username")
-    private User userR;
-    @ManyToOne @JoinColumn(name = "Productid")
-    private Product productR;
+
+    public Rating(Long id, Integer stars) {
+        this.id = id;
+        this.stars = stars;
+    }
+
+    public Rating() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getStars() {
+        return stars;
+    }
+
+    public void setStars(Integer stars) {
+        this.stars = stars;
+    }
 }
