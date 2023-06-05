@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "https://web-app-da.web.app/"}, maxAge = 3600)
 @RestController
 @RequestMapping(Contanst.Api.Path.USER + "/cart")
 @RequiredArgsConstructor
@@ -46,5 +46,10 @@ public class CartController {
         }
         cartService.delete(cart.get().getId());
         return new ResponseEntity<>(new ResponseMessage("Delete Success"), HttpStatus.OK);
+    }
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteAllCart(@RequestBody Long[] cartIdArray){
+        cartService.deleteAllListCart(cartIdArray);
+        return new ResponseEntity<>(new ResponseMessage("Delete All Success"), HttpStatus.OK);
     }
 }

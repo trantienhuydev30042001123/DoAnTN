@@ -27,7 +27,7 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "https://web-app-da.web.app/"}, maxAge = 3600)
 @RestController
 @RequestMapping(Contanst.Api.Path.USER)
 @RequiredArgsConstructor
@@ -78,6 +78,6 @@ public class UserAuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.createToken(authentication);
         UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
-        return ResponseEntity.ok(new jwtResponse(token, userPrinciple.getName(), userPrinciple.getAuthorities()));
+        return ResponseEntity.ok(new jwtResponse(token,userPrinciple.getId(), userPrinciple.getName(), userPrinciple.getAuthorities()));
     }
 }

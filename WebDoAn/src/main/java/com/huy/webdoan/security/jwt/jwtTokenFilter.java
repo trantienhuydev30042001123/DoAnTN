@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -15,9 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 public class jwtTokenFilter extends OncePerRequestFilter {
     private static final Logger logger= LoggerFactory.getLogger(jwtTokenFilter.class);
+    public static String CURRENT_USER = "";
     @Autowired
     private jwtProvider jwtProvider;
     @Autowired
@@ -29,6 +30,7 @@ public class jwtTokenFilter extends OncePerRequestFilter {
             String token = getJwt(request);
             if (token!=null && jwtProvider.validateToken(token)){
                 String username = jwtProvider.getUsernameFromToken(token);
+                CURRENT_USER = username;
                 UserDetails userDetails = userDetailService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null,userDetails.getAuthorities()

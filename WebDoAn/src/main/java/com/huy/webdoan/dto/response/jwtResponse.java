@@ -7,13 +7,30 @@ import java.util.Collection;
 public class jwtResponse {
     String token;
     private String type = "Bearer";
+    private Long id;
     private String name;
     private Collection<? extends GrantedAuthority> roles;
 
-    public jwtResponse(String token, String name, Collection<? extends GrantedAuthority> authorities) {
+//    public jwtResponse(String token, String name, Collection<? extends GrantedAuthority> authorities) {
+//        this.token = token;
+//        this.name = name;
+//        this.roles = authorities;
+//    }
+
+    public jwtResponse(String token,Long id, String name, Collection<? extends GrantedAuthority> roles) {
         this.token = token;
+        this.type = type;
+        this.id = id;
         this.name = name;
-        this.roles = authorities;
+        this.roles = roles;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getToken() {

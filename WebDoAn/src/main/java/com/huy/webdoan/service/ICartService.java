@@ -13,4 +13,6 @@ public interface ICartService {
 
     Optional<Cart> findById(Long id);
     void delete(Long id);
+
+    void deleteAllListCart(Long[] cartIdArray);
 }

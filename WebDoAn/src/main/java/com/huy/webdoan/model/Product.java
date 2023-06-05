@@ -93,11 +93,9 @@ public class Product implements Serializable {
     public Integer getPrice() {
         return price;
     }
-
     public void setPrice(Integer price) {
         this.price = price;
     }
-
     public Integer getDiscount() {
         return discount;
     }

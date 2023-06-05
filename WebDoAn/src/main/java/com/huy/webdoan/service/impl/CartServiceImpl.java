@@ -1,7 +1,6 @@
 package com.huy.webdoan.service.impl;
 
 import com.huy.webdoan.model.Cart;
-import com.huy.webdoan.model.LogIn.User;
 import com.huy.webdoan.model.Product;
 import com.huy.webdoan.repository.CartRepository;
 import com.huy.webdoan.repository.IAccountRepository;
@@ -11,6 +10,7 @@ import com.huy.webdoan.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,5 +45,10 @@ public class CartServiceImpl implements ICartService {
     @Override
     public void delete(Long id) {
         cartRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllListCart(Long[] cartIdArray) {
+        cartRepository.deleteAllById(Arrays.asList(cartIdArray));
     }
 }

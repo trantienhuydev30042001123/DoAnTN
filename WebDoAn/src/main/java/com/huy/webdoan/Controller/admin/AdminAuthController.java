@@ -78,6 +78,6 @@ public class AdminAuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.createToken(authentication);
         UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
-        return ResponseEntity.ok(new jwtResponse(token, userPrinciple.getName(), userPrinciple.getAuthorities()));
+        return ResponseEntity.ok(new jwtResponse(token,userPrinciple.getId(), userPrinciple.getName(), userPrinciple.getAuthorities()));
     }
 }
